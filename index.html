@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Frequência Escolar</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        padding: 20px;
+        margin: 0; /* Removida a margem padrão para melhor alinhamento do topo */
+    }
+    
+    /* --- NOVO ESTILO DO CABEÇALHO --- */
+    .school-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+    .school-logo {
+        width: 100px; /* Tamanho ajustado para proporção ideal */
+        height: auto;
+    }
+    .school-name {
+        font-size: 26px;
+        font-weight: bold;
+        color: #002244; /* Azul escuro institucional */
+        margin: 0;
+    }
+    /* -------------------------------- */
+
+    h1 {
+        text-align: center;
+        color: #333; /* Adicionada cor suave para contrastar bem com o azul do cabeçalho */
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 300px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 10px;
+        box-sizing: border-box; /* Garante que o padding não quebre a largura */
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .calc {
+        background: #007bff;
+        color: white;
+    }
+    .clear {
+        background: #6c757d;
+        color: white;
+        margin-top: 5px;
+    }
+    .result {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<header class="school-header">
+    <img src="logo.png" alt="Logo da Escola" class="school-logo">
+    <h2 class="school-name">ESCOLA JOSÉ MARTINHO CERPA DE MENEZES</h2>
+</header>
+
+<h1>📊 Calculadora de Frequência Escolar</h1>
+
+<div class="container">
+
+    <div class="box">
+        <h3>Até a 4ª Série</h3>
+        <label>Dias frequentados:</label>
+        <input type="number" id="diasFreq">
+
+        <label>Total de dias letivos:</label>
+        <input type="number" id="diasTotal">
+
+        <button class="calc" onclick="calcularDias()">Calcular</button>
+        <button class="clear" onclick="limparDias()">Limpar</button>
+
+        <div class="result" id="resultadoDias"></div>
+    </div>
+
+    <div class="box">
+        <h3>A partir da 5ª Série</h3>
+        <label>Aulas frequentadas:</label>
+        <input type="number" id="aulasFreq">
+
+        <label>Total de aulas no mês:</label>
+        <input type="number" id="aulasTotal">
+
+        <button class="calc" onclick="calcularAulas()">Calcular</button>
+        <button class="clear" onclick="limparAulas()">Limpar</button>
+
+        <div class="result" id="resultadoAulas"></div>
+    </div>
+
+</div>
+
+<script>
+function calcularDias() {
+    let freq = document.getElementById("diasFreq").value;
+    let total = document.getElementById("diasTotal").value;
+    let resultado = document.getElementById("resultadoDias");
+
+    if (total == 0 || total === "") {
+        resultado.innerHTML = "⚠️ Informe valores válidos";
+        resultado.style.color = "black";
+        return;
+    }
+
+    let porcentagem = (freq * 100) / total;
+    porcentagem = porcentagem.toFixed(2);
+
+    resultado.innerHTML = porcentagem + "%";
+    resultado.style.color = porcentagem >= 75 ? "green" : "red";
+}
+
+function calcularAulas() {
+    let freq = document.getElementById("aulasFreq").value;
+    let total = document.getElementById("aulasTotal").value;
+    let resultado = document.getElementById("resultadoAulas");
+
+    if (total == 0 || total === "") {
+        resultado.innerHTML = "⚠️ Informe valores válidos";
+        resultado.style.color = "black";
+        return;
+    }
+
+    let porcentagem = (freq * 100) / total;
+    porcentagem = porcentagem.toFixed(2);
+
+    resultado.innerHTML = porcentagem + "%";
+    resultado.style.color = porcentagem >= 75 ? "green" : "red";
+}
+
+function limparDias() {
+    document.getElementById("diasFreq").value = "";
+    document.getElementById("diasTotal").value = "";
+    document.getElementById("resultadoDias").innerHTML = "";
+}
+
+function limparAulas() {
+    document.getElementById("aulasFreq").value = "";
+    document.getElementById("aulasTotal").value = "";
+    document.getElementById("resultadoAulas").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
